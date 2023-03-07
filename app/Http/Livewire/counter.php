@@ -1,17 +1,20 @@
 <?php
 
 namespace App\Http\Livewire;
-
+use Livewire\WithPagination;
 use Livewire\Component;
 use App\Models\User;
 
 class Counter extends Component
 {
-    public $lname, $fname, $address, $email, $year = 'All', $course = 'All';
+    public $lname, $fname, $address, $email, $year = 'All', $course = 'All', $search;
     public $userId, $studentDelete;
+    use WithPagination;
+
+    protected $paginationTheme= 'bootstrap';
 
     public function loadStudents() {
-        $query = User::orderBy('fname', 'asc');
+        $query = User::orderBy('fname', 'asc')->search($this->search);
 
         if($this->course != 'All') {
             $query->where('course', $this->course);
@@ -20,7 +23,7 @@ class Counter extends Component
             $query->where('year', $this->year);
         }
 
-        $users = $query->get();
+        $users = $query->paginate(5);
 
         return compact('users');
     }
@@ -60,4 +63,6 @@ class Counter extends Component
         return view('livewire.counter',
          $this->loadStudents() );
     }
-}
+
+    }
+

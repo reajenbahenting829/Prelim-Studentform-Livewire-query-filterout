@@ -1,11 +1,12 @@
-<div class="container mt-4">
+<div class="container mt-3">
     <div class="row">
         <div class="col-sm-3">
             <div class="card mt-8 shadow form-group mb-3">
-                <div class="card-header bg-primary text-warning ">
-                    <h1 class="text-center">University Of Bohol</h1>
+                <div class="card-header bg-dark text-warning ">
+                    <h1 class="text-center mt-2">University Of Bohol</h1>
                 </div>
             </div>
+            <div class="card-body shadow">
             <div class="card-body">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" wire:model="lname" required>
@@ -67,6 +68,7 @@
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
+            </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-end float-end">
                     <button class="btn btn-success text-warning mt-3" wire:click="addStudent()">Add Student</button>
@@ -105,10 +107,13 @@
                         <option value="4th Year">4th Year</option>
                     </select>
                 </div>
+                <div class="col">
+                    <input type="text" id="" class="form-control" wire:model="search" placeholder="Search">
+                </div>
             </div>
             </div>
             <div class="card mt-8 shadow form-group mb-3">
-                <div class="card-header bg-primary ">
+                <div class="card-header bg-dark text-warning text-center ">
                     <h1 class="mb-2">Student Lists</h1>
                     {{-- delete modal --}}
                     <div wire:ignore.self class="modal fade" id="delete-modal-student" tabindex="-1" role="dialog"
@@ -141,7 +146,7 @@
 
             <div class="card shadow">
                 <div class="card-body">
-                    <table class="table table-bordered table table-striped table-striped bg-success text-warning ">
+                    <table class="table table-bordered table table-striped table-striped bg-transparent text-warning ">
                         <thead>
                             <tr class="bg-black text-info">
                                 <th>ID.</th>
@@ -175,20 +180,24 @@
                                 </tr>
                             @endforeach
                             @if ($users->count() == 0)
-                                <td colspan="7" class="text-center text-white">No user data found in this table.
+                                <td colspan="7" class="text-center text-dark">No user data found in this table.
                                 </td>
                             @endif
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
     </div>
+@if (count($users))
+{{$users->links('livewire-pagination-links')}}
+@endif
 </div>
 
 <style>
     body {
-        background-color: pink;
+        background-color: rgb(39, 140, 212);
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: 100% 100%;

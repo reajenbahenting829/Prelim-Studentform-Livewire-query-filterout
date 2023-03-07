@@ -92,7 +92,7 @@
 <style>
 
     body{
-        background-image:url('https://i.ytimg.com/vi/3uAr3SoEQBE/maxresdefault.jpg') ;
+        background-color:teal;
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: 100% 100%;
